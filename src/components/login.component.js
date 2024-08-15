@@ -38,7 +38,7 @@ export default class Login extends Component {
       .then(res => {
         if(bcrypt.compareSync(this.state.password, res.data.password)){
             console.log('Login successful');
-            this.props.history.push('/register');
+            window.location.href = 'http://localhost:4000/index.html';
         } else {
             console.log('Login failed');
         }

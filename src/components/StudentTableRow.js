@@ -25,9 +25,9 @@ export default class StudentTableRow extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.obj.name}</td>
+        <td>{this.props.obj.fName}</td>
+        <td>{this.props.obj.lName}</td>
         <td>{this.props.obj.email}</td>
-        <td>{this.props.obj.id}</td>
         <td>
           <Link
             className="edit-link" path={"product/:id"}

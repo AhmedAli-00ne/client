@@ -9,26 +9,26 @@ export default class EditStudent extends Component {
   constructor(props) {
     super(props)
 
-    this.onChangeStudentName = this.onChangeStudentName.bind(this);
+    this.onChangeStudentFirstName = this.onChangeStudentFirstName.bind(this);
+    this.onChangeStudentLastName = this.onChangeStudentLastName.bind(this);
     this.onChangeStudentEmail = this.onChangeStudentEmail.bind(this);
-    this.onChangeStudentId = this.onChangeStudentId.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     // State
     this.state = {
       name: '',
       email: '',
-      id: ''
+      password: ''
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/students/edit-student/' + this.props.match.params.id)
+    axios.get('http://localhost:4000/students/login/' + this.props.match.params.email)
       .then(res => {
         this.setState({
           name: res.data.name,
           email: res.data.email,
-          id: res.data.id
+          password: res.data.password
         });
       })
       .catch((error) => {
@@ -36,25 +36,25 @@ export default class EditStudent extends Component {
       })
   }
 
-  onChangeStudentName(e) {
-    this.setState({ name: e.target.value })
+  onChangeStudentFirstName(e) {
+    this.setState({ fName: e.target.value })
+  }
+
+  onChangeStudentLastName(e) {
+    this.setState({ lName: e.target.value })
   }
 
   onChangeStudentEmail(e) {
     this.setState({ email: e.target.value })
   }
 
-  onChangeStudentId(e) {
-    this.setState({ id: e.target.value })
-  }
-
   onSubmit(e) {
     e.preventDefault()
-
+    console.log(this.state.password)
     const studentObject = {
       name: this.state.name,
       email: this.state.email,
-      id: this.state.id
+      password: this.state.password
     };
 
     axios.put('http://localhost:4000/students/update-student/' + this.props.match.params.id, studentObject)
@@ -73,19 +73,19 @@ export default class EditStudent extends Component {
   render() {
     return (<div className="form-wrapper">
       <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="Name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" value={this.state.name} onChange={this.onChangeStudentName} />
+        <Form.Group controlId="fName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control type="text" value={this.state.fName} onChange={this.onChangeStudentFirstName} />
+        </Form.Group>
+
+        <Form.Group controlId="lName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control type="text" value={this.state.lName} onChange={this.onChangeStudentLastName} />
         </Form.Group>
 
         <Form.Group controlId="Email">
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" value={this.state.email} onChange={this.onChangeStudentEmail} />
-        </Form.Group>
-
-        <Form.Group controlId="Name">
-          <Form.Label>ID</Form.Label>
-          <Form.Control type="text" value={this.state.id} onChange={this.onChangeStudentId} />
         </Form.Group>
 
         <Button variant="danger" size="lg" block="block" type="submit">
