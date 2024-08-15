@@ -13,13 +13,6 @@ export default class EditStudent extends Component {
     this.onChangeStudentLastName = this.onChangeStudentLastName.bind(this);
     this.onChangeStudentEmail = this.onChangeStudentEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-    // State
-    this.state = {
-      name: '',
-      email: '',
-      password: ''
-    }
   }
 
   componentDidMount() {
