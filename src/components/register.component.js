@@ -56,6 +56,7 @@ export default class CreateStudent extends Component {
       .then(res => console.log(res.data));
 
     this.setState({ fName: '', lName: '', email: '', password: '' })
+    window.location.href = '/login';
   }
 
   render() {

@@ -19,11 +19,11 @@ function App() {
     <div className="App">
       <Router>
         <header className="App-header">
-          <Navbar bg="dark" variant="dark">
+          <Navbar bg="dark" variant="light">
             <Container>
               <Navbar.Brand>
-                <Link to={'/login'} className="nav-link">
-                  Login Page
+                <Link className="nav-link">
+                  Home Page
                 </Link>
               </Navbar.Brand>
             </Container>

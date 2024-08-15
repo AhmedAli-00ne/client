@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import StudentTableRow from './StudentTableRow';
+import Button from 'react-bootstrap/Button';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 
 export default class StudentList extends Component {
@@ -11,6 +13,12 @@ export default class StudentList extends Component {
     this.state = {
       students: []
     };
+  }
+
+
+  onSubmit(e) {
+    console.log('here');
+    window.location.href = 'http://localhost:4000/index.html';
   }
 
   componentDidMount() {
@@ -47,6 +55,20 @@ export default class StudentList extends Component {
           {this.DataTable()}
         </tbody>
       </Table>
+      <Button variant="danger" size="lg" block="block" type="submit" className="mt-4 col-4">
+          Back
+      </Button>
+      <Link to="/register" style={{ marginLeft: '30%' }} >
+            <Button
+              variant="danger"
+              size="lg"
+              block="block"
+              type="button"
+              className="mt-4 col-4"
+            >
+              Create User
+            </Button>
+          </Link>
     </div>);
   }
 }

@@ -13,13 +13,22 @@ export default class EditStudent extends Component {
     this.onChangeStudentLastName = this.onChangeStudentLastName.bind(this);
     this.onChangeStudentEmail = this.onChangeStudentEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    // State
+    this.state = {
+      fName: '',
+      lName: '',
+      email: '',
+      password: ''
+    }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/students/login/' + this.props.match.params.email)
+    axios.get('http://localhost:4000/students/edit-student/' + this.props.match.params.id)
       .then(res => {
         this.setState({
-          name: res.data.name,
+          fName: res.data.fName,
+          lName: res.data.lName,
           email: res.data.email,
           password: res.data.password
         });
@@ -45,7 +54,8 @@ export default class EditStudent extends Component {
     e.preventDefault()
     console.log(this.state.password)
     const studentObject = {
-      name: this.state.name,
+      fName: this.state.fName,
+      lName: this.state.lName,
       email: this.state.email,
       password: this.state.password
     };
@@ -54,6 +64,7 @@ export default class EditStudent extends Component {
       .then((res) => {
         console.log(res.data)
         console.log('Student successfully updated')
+        window.location.reload();
       }).catch((error) => {
         console.log(error)
       })
